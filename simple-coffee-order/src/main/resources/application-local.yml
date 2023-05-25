@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/simple-coffee-order?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/simple-coffee-order?serverTimezone=UTC
     username: root
     password: root
-    jpa:
-        hibernate:
-            ddl-auto: update
-        show-sql: false
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update

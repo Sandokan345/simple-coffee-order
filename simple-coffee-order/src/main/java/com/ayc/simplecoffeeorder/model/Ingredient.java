@@ -17,11 +17,9 @@ import java.io.Serializable;
 @SuppressWarnings("all")
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Coffee extends BaseEntity implements Serializable {
+public class Ingredient extends BaseEntity implements Serializable {
 
-    private static final long serialVersionUID = -5763473152179891139L;
+    private static final long serialVersionUID = -8483690218727461038L;
 
     String name;
-
-    Double price;
 }
