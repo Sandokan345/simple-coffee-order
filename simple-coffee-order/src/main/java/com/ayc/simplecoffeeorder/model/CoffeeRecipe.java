@@ -5,6 +5,8 @@ import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 
@@ -17,11 +19,17 @@ import java.io.Serializable;
 @SuppressWarnings("all")
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Coffee extends BaseEntity implements Serializable {
+public class CoffeeRecipe extends BaseEntity implements Serializable {
 
-    private static final long serialVersionUID = -5763473152179891139L;
+    private static final long serialVersionUID = 1289408704231273917L;
 
-    String name;
+    @ManyToOne
+    @JoinColumn(name = "coffee_id")
+    Coffee coffee;
 
-    Double price;
+    @ManyToOne
+    @JoinColumn(name = "ingredient_id")
+    Ingredient ingredient;
+
+    Double quantity;
 }
