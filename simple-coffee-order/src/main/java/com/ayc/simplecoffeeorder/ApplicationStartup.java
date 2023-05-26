@@ -11,10 +11,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 @Log4j2
@@ -29,6 +26,61 @@ public class ApplicationStartup implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        saveDefaultValues();
+        userInteractive();
+    }
+
+    private void userInteractive() {
+        menu();
+    }
+
+    private void menu() {
+        List<Coffee> coffees = coffeeService.findAll();
+        System.out.println("Menü:");
+        for (int i = 0; i < coffees.size(); i++) {
+            System.out.println((i + 1) + ". " + coffees.get(i).getName() + " - " + coffees.get(i).getPrice() + " TL");
+        }
+        System.out.println("0. Çıkış");
+        System.out.println("Lütfen içmek istediğiniz kahvenin numarasını giriniz:");
+        int coffeeNumber = getValidInput(coffees.size());
+        System.out.println("Teşekkürler kahveniz hazırlanıyor...");
+        List<CoffeeRecipe> coffeeRecipes = coffeeRecipeService.findByCoffee(coffees.get(coffeeNumber - 1));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(coffees.get(coffeeNumber - 1).getName());
+        stringBuilder.append(" seçtiniz. Bu içeceğimiz ");
+        for (int i = 0; i < coffeeRecipes.size(); i++) {
+            stringBuilder.append(coffeeRecipes.get(i).getQuantity());
+            stringBuilder.append(" doz ");
+            stringBuilder.append(coffeeRecipes.get(i).getIngredient().getName());
+            stringBuilder.append(" ");
+            if (i != coffeeRecipes.size() - 1) {
+                stringBuilder.append("ve ");
+            }
+        }
+        stringBuilder.append("içermektedir. Afiyet Olsun.");
+        System.out.println(stringBuilder.toString());
+        menu();
+    }
+
+    private int getValidInput(int size) {
+        Scanner scanner = new Scanner(System.in);
+        while (!scanner.hasNextInt()) {
+            System.out.println("Geçersiz giriş! Lütfen bir sayı girin.");
+            scanner.next();
+        }
+        int coffeeNumber = scanner.nextInt();
+        if (coffeeNumber < 0 || coffeeNumber > size) {
+            System.out.println("Geçersiz giriş! Lütfen menüdeki bir sayı girin.");
+            menu();
+        }
+        if (coffeeNumber == 0) {
+            System.out.println("Güle güle!");
+            System.exit(0);
+        }
+        return coffeeNumber;
+    }
+
+    private void saveDefaultValues() {
         if (coffeeService.count() > 0) {
             log.info("Coffee list is already filled");
         } else {
@@ -58,7 +110,6 @@ public class ApplicationStartup implements CommandLineRunner {
     }
 
     private void fillCoffeeRecipes(List<Coffee> coffees, List<Ingredient> ingredients, List<CoffeeRecipe> coffeeRecipes) {
-        // ingredient name, ingredients index
         Map<String, Integer> ingredientMap = new HashMap<>();
         for (int i = 0; i < ingredients.size(); i++) {
             ingredientMap.put(ingredients.get(i).getName(), i);
