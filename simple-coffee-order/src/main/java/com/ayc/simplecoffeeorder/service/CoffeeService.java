@@ -23,4 +23,8 @@ public class CoffeeService {
     public long count() {
         return coffeeDao.count();
     }
+
+    public List<Coffee> findAll() {
+        return coffeeDao.findAll();
+    }
 }
