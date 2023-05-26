@@ -1,4 +1,6 @@
 # SIMPLE COFFEE ORDERING SYSTEM
+
+Author: Ahmet Yakup Cetinkaya
 ## Description
 This is a simple coffee ordering system that allows the user to order coffee and add toppings to it.
 ## Installation
