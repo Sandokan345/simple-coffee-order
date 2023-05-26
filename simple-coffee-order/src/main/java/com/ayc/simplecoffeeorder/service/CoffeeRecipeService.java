@@ -1,5 +1,6 @@
 package com.ayc.simplecoffeeorder.service;
 
+import com.ayc.simplecoffeeorder.model.Coffee;
 import com.ayc.simplecoffeeorder.model.CoffeeRecipe;
 import com.ayc.simplecoffeeorder.repository.CoffeeRecipeDao;
 import lombok.RequiredArgsConstructor;
@@ -19,5 +20,9 @@ public class CoffeeRecipeService {
 
     public List<CoffeeRecipe> saveAll(List<CoffeeRecipe> coffeeRecipes) {
         return coffeeRecipeDao.saveAll(coffeeRecipes);
+    }
+
+    public List<CoffeeRecipe> findByCoffee(Coffee coffee) {
+        return coffeeRecipeDao.findByCoffee(coffee);
     }
 }
