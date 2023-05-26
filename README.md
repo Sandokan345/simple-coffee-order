@@ -28,3 +28,19 @@ This is a simple coffee ordering system that allows the user to order coffee and
 4. Swagger 2.9.2
 5. JUnit
 6. MySQL
+
+## SAMPLE USAGE
+Menü:
+1. Espresso - 20.0 TL
+2. Double Espresso - 29.0 TL
+3. Cappuccino - 27.0 TL
+4. Caffe Latte - 27.0 TL
+5. Mocha - 32.0 TL
+6. Americano - 25.0 TL
+7. Hot Water - 5.0 TL
+0. Çıkış
+- Lütfen içmek istediğiniz kahvenin numarasını giriniz:
+- 5
+- Teşekkürler kahveniz hazırlanıyor...
+- Mocha seçtiniz. Bu içeceğimiz 1.0 doz Espresso ve 2.0 doz Hot Chocolate ve 1.0 doz Milk Foam ve 1.0 doz Steamed 
+  Milk içermektedir. Afiyet Olsun.
