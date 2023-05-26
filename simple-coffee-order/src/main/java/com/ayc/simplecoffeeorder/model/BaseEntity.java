@@ -3,8 +3,8 @@ package com.ayc.simplecoffeeorder.model;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
@@ -28,7 +28,7 @@ public abstract class BaseEntity {
     @Column(updatable = false)
     OffsetDateTime createdAt;
 
-    @LastModifiedDate
+    @UpdateTimestamp
     OffsetDateTime updatedAt;
 
     @PrePersist
